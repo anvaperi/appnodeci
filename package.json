@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,5 +18,11 @@
   "bugs": {
     "url": "https://github.com/anvaperi/appnodeci/issues"
   },
-  "homepage": "https://github.com/anvaperi/appnodeci#readme"
+  "homepage": "https://github.com/anvaperi/appnodeci#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
 }
