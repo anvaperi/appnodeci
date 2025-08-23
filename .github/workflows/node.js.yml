@@ -1,0 +1,44 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    #xxx - run: npm run build --if-present
+    #xxx - run: npm test
+
+  deploy:  # Unknown key deploy Did you mean defaults?
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2 # actions/checkout@v4
+      #- name: Install Heroku CLI # <- IMPORTANT!!! Make sure the cli is installed before using the action
+      #  run: |
+      #    curl https://cli-assets.heroku.com/install.sh | sh 
+      - uses: akhileshns/heroku-deploy@v3.14.15 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "anvaperideustodemo" #Must be unique in Heroku
+          heroku_email: "donantonio5314@gmail.com"
