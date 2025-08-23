@@ -34,9 +34,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2 # actions/checkout@v4
-      #- name: Install Heroku CLI # <- IMPORTANT!!! Make sure the cli is installed before using the action
-      #  run: |
-      #    curl https://cli-assets.heroku.com/install.sh | sh 
+      - name: Install Heroku CLI # <- IMPORTANT!!! Make sure the cli is installed before using the action
+        run: |
+          curl https://cli-assets.heroku.com/install.sh | sh 
       - uses: akhileshns/heroku-deploy@v3.13.15 #! v3.14.15 doesn't properly install Heroku CLI 
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
