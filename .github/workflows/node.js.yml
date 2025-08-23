@@ -29,3 +29,16 @@ jobs:
     - run: npm ci
     #xxx - run: npm run build --if-present
     #xxx - run: npm test
+
+  deploy:  # Unknown key deploy Did you mean defaults?
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2 # actions/checkout@v4
+      #- name: Install Heroku CLI # <- IMPORTANT!!! Make sure the cli is installed before using the action
+      #  run: |
+      #    curl https://cli-assets.heroku.com/install.sh | sh 
+      - uses: akhileshns/heroku-deploy@v3.14.15 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "anvaperideustodemo" #Must be unique in Heroku
+          heroku_email: "donantonio5314@gmail.com"
